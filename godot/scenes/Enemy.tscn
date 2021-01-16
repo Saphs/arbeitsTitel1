@@ -164,7 +164,7 @@ animations = [ {
 [node name="Worminator" type="AnimatedSprite" parent="."]
 frames = SubResource( 25 )
 animation = "shoot"
-frame = 3
+frame = 2
 playing = true
 flip_h = true
 
@@ -172,6 +172,5 @@ flip_h = true
 position = Vector2( -226.792, -11.4876 )
 scale = Vector2( 10, 10 )
 frames = SubResource( 30 )
-frame = 1
 playing = true
 flip_h = true
