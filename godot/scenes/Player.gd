@@ -40,26 +40,27 @@ func set_animation():
 		get_node("P_AnimatedSprite").animation = "P_walkDown"
 
 func _input(event):
-	movement_vec = Vector2(0, 0)
-	if Input.is_action_pressed("ui_up"):
-		movement_vec += UP_VEC
-	if Input.is_action_pressed("ui_down"):
-		movement_vec += DOWN_VEC
-	if Input.is_action_pressed("ui_left"):
-		movement_vec += LEFT_VEC
-	if Input.is_action_pressed("ui_right"):
-		movement_vec += RIGHT_VEC
+	if (event.is_action_type()):
+		movement_vec = Vector2(0, 0)
+		if Input.is_action_pressed("ui_up"):
+			movement_vec += UP_VEC
+		if Input.is_action_pressed("ui_down"):
+			movement_vec += DOWN_VEC
+		if Input.is_action_pressed("ui_left"):
+			movement_vec += LEFT_VEC
+		if Input.is_action_pressed("ui_right"):
+			movement_vec += RIGHT_VEC
 	
-	if Input.is_action_just_released("ui_up"):
-		last_dir = "UP"
-	elif Input.is_action_just_released("ui_down"):
-		last_dir = "DOWN"
-	elif Input.is_action_just_released("ui_left"):
-		last_dir = "LEFT"
-	elif Input.is_action_just_released("ui_right"):
-		last_dir = "RIGHT"
+		if Input.is_action_just_released("ui_up"):
+			last_dir = "UP"
+		elif Input.is_action_just_released("ui_down"):
+			last_dir = "DOWN"
+		elif Input.is_action_just_released("ui_left"):
+			last_dir = "LEFT"
+		elif Input.is_action_just_released("ui_right"):
+			last_dir = "RIGHT"
 		
-	set_animation()
+		set_animation()
 
 func _process(delta):
 	position += delta * player_speed * movement_vec.normalized()
