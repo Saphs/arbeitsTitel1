@@ -27,8 +27,6 @@ func _ready():
 	
 	dash_cd_timer.set_wait_time(dash_cd)
 	dash_cd_timer.set_one_shot(true)
-	func set_isDashReady_true():
-		isDashReady = true
 	dash_cd_timer.connect("timeout", self, "set_isDashReady_true")
 	add_child(dash_cd_timer)
 	
@@ -94,12 +92,13 @@ func _input(event):
 func trigger_dash():
 	if (isDashReady && movement_vec.length() > 0):
 		isDashReady = false
-		dash_cd_timer.start()
-		dash_vec = movement_vec
 		isDashing = true
+		dash_vec = movement_vec
+		dash_cd_timer.start()
 		dash_timer.start()
 
-
+func set_isDashReady_true():
+	isDashReady = true
 
 func set_isDashing_false():
 	isDashing = false
