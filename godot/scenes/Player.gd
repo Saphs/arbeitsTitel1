@@ -1,6 +1,18 @@
-extends Node2D
+extends KinematicBody2D
 
-var player_speed = 50
+signal state_change
+
+var player_speed = 75
+
+const dash_speed = 75 * 3
+var dash_vec = Vector2(0, 0)
+var isDashing = false
+var isDashReady = true 
+var dash_cd_timer = Timer.new()
+var dash_timer = Timer.new()
+const dash_cd = 2.5
+const dash_duration = 0.2
+
 var movement_vec = Vector2(0, 0)
 var last_dir = "DOWN"
 
@@ -11,7 +23,19 @@ const DOWN_VEC = Vector2(0, 1)
 
 func _ready():
 	get_node("P_AnimatedSprite").playing = true
-	print("Player node _ready")
+	emit_signal("state_change", self)
+	
+	dash_cd_timer.set_wait_time(dash_cd)
+	dash_cd_timer.set_one_shot(true)
+	func set_isDashReady_true():
+		isDashReady = true
+	dash_cd_timer.connect("timeout", self, "set_isDashReady_true")
+	add_child(dash_cd_timer)
+	
+	dash_timer.set_wait_time(dash_duration)
+	dash_timer.set_one_shot(true)
+	dash_timer.connect("timeout", self, "set_isDashing_false")
+	add_child(dash_timer)
 
 func set_idle_animation():
 	if (last_dir == "UP"):
@@ -41,6 +65,7 @@ func set_animation():
 
 func _input(event):
 	if (event.is_action_type()):
+		# Movment
 		movement_vec = Vector2(0, 0)
 		if Input.is_action_pressed("ui_up"):
 			movement_vec += UP_VEC
@@ -50,7 +75,8 @@ func _input(event):
 			movement_vec += LEFT_VEC
 		if Input.is_action_pressed("ui_right"):
 			movement_vec += RIGHT_VEC
-	
+		
+		# Animation
 		if Input.is_action_just_released("ui_up"):
 			last_dir = "UP"
 		elif Input.is_action_just_released("ui_down"):
@@ -59,12 +85,29 @@ func _input(event):
 			last_dir = "LEFT"
 		elif Input.is_action_just_released("ui_right"):
 			last_dir = "RIGHT"
-		
 		set_animation()
+	
+	# Skill
+	if Input.is_key_pressed(KEY_SPACE):
+		trigger_dash()
+
+func trigger_dash():
+	if (isDashReady && movement_vec.length() > 0):
+		isDashReady = false
+		dash_cd_timer.start()
+		dash_vec = movement_vec
+		isDashing = true
+		dash_timer.start()
+
+
+
+func set_isDashing_false():
+	isDashing = false
+
+func process_dash(delta):
+	if (isDashing):
+		var collision = move_and_collide(delta * dash_speed * dash_vec.normalized())
 
 func _process(delta):
-	position += delta * player_speed * movement_vec.normalized()
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+	process_dash(delta)
+	var collision = move_and_collide(delta * player_speed * movement_vec.normalized())
