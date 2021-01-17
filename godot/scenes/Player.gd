@@ -4,14 +4,14 @@ signal state_change
 
 var player_speed = 75
 
-const dash_speed = 75 * 3
+const dash_speed = 100 * 3
 var dash_vec = Vector2(0, 0)
 var isDashing = false
 var isDashReady = true 
 var dash_cd_timer = Timer.new()
 var dash_timer = Timer.new()
 const dash_cd = 2.5
-const dash_duration = 0.2
+const dash_duration = 0.15
 
 var movement_vec = Vector2(0, 0)
 var last_dir = "DOWN"
