@@ -34,6 +34,6 @@ script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="KinematicBody2D"]
 frames = SubResource( 5 )
-frame = 2
+frame = 1
 playing = true
 flip_h = true
