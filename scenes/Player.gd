@@ -24,6 +24,7 @@ const DOWN_VEC = Vector2(0, 1)
 func _ready():
 	get_node("P_AnimatedSprite").playing = true
 	emit_signal("state_change", self)
+	add_to_group("player")
 	
 	dash_cd_timer.set_wait_time(dash_cd)
 	dash_cd_timer.set_one_shot(true)

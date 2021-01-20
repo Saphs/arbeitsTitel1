@@ -7,16 +7,16 @@ extends Node
 var arena_vec = Vector2(90, 90)
 var player_start_pos = Vector2(0, 100)
 
+const Player = preload("res://scenes/Player.tscn")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
 	var landscape = load_tscn("res://scenes/landscape.tscn")
-	var player = load_tscn("res://scenes/Player.tscn")
 	var enemy_scene = load("res://scenes/Enemy.tscn")
 
 	add_child(landscape)
-	player.position = player_start_pos
-	add_child(player)
+	spawn_player()
 
 	yield(get_tree().create_timer(0.7),"timeout")
 	var enemy = enemy_scene.instance()
@@ -37,3 +37,7 @@ func random_position(max_x, max_y):
 	rand.randomize()
 	var y = rand.randf_range(-max_y,max_y)
 	return Vector2(x, y)
+
+func spawn_player():
+	var player = Player.instance()
+	add_child(player)
