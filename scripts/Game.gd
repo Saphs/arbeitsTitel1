@@ -13,7 +13,7 @@ const Player = preload("res://scenes/Player.tscn")
 func _ready():
 	
 	var landscape = load_tscn("res://scenes/landscape.tscn")
-	var enemy_scene = load("res://scenes/Enemy.tscn")
+	var enemy_scene = load("res://scenes/Worminator.tscn")
 
 	add_child(landscape)
 	spawn_player()

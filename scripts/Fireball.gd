@@ -16,8 +16,7 @@ func set_animation_direction(new_animation_direction: int):
 
 
 func _ready():
-	print(direction)
-	print("Shooting projectile")
+	print(self)
 
 
 func _physics_process(delta):
