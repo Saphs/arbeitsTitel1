@@ -1,16 +1,19 @@
-extends Node
-
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-var arena_vec = Vector2(90, 90)
-var player_start_pos = Vector2(0, 100)
+extends Node2D
 
 const Player = preload("res://scenes/Player.tscn")
 
+
+var arena_vec = Vector2(90, 90)
+var player_start_pos = Vector2(0, 100)
+
+
+
+onready var fireball_manager = $FireballManager
+
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
+	GlobalSignals.connect("fireball_fired", fireball_manager, "handle_fireball_spawned")
+	
 	
 	var landscape = load_tscn("res://scenes/landscape.tscn")
 	var enemy_scene = load("res://scenes/Worminator.tscn")
