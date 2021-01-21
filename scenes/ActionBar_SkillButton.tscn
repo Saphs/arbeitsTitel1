@@ -1,0 +1,67 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://skill_sheet8.png" type="Texture" id=1]
+[ext_resource path="res://scenes/SkillIcon.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/ActionBar_SkillButton.gd" type="Script" id=3]
+
+[node name="Control" type="CenterContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+texture = ExtResource( 1 )
+icon_index = 5
+key_bind_display = "SPC"
+name_display = "Dash"
+spell_name = "Default"
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+margin_left = 480.0
+margin_top = 259.0
+margin_right = 544.0
+margin_bottom = 341.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 57.0
+margin_bottom = 75.0
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+margin_right = 50.0
+margin_bottom = 14.0
+text = "Dash"
+align = 1
+valign = 1
+
+[node name="HBoxContainer" type="CenterContainer" parent="PanelContainer/VBoxContainer"]
+margin_top = 18.0
+margin_right = 50.0
+margin_bottom = 68.0
+
+[node name="SkillIcon" parent="PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 2 )]
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource( 1 )
+icon_index = 5
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/SkillIcon"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -8.0
+margin_top = -14.0
+grow_horizontal = 2
+custom_colors/font_color = Color( 0.537255, 1, 0.301961, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = -1
+custom_constants/shadow_offset_y = -1
+text = "SPC"
+align = 2
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -97,6 +97,7 @@ func trigger_dash():
 		dash_vec = movement_vec
 		dash_cd_timer.start()
 		dash_timer.start()
+		get_tree().call_group("player_skill", "start_cooldown", "dash", dash_cd)
 
 func set_isDashReady_true():
 	isDashReady = true
@@ -106,8 +107,9 @@ func set_isDashing_false():
 
 func process_dash(delta):
 	if (isDashing):
-		var collision = move_and_collide(delta * dash_speed * dash_vec.normalized())
+		var _collision = move_and_collide(delta * dash_speed * dash_vec.normalized())
 
 func _process(delta):
 	process_dash(delta)
-	var collision = move_and_collide(delta * player_speed * movement_vec.normalized())
+	if (!isDashing):
+		var _collision = move_and_collide(delta * player_speed * movement_vec.normalized())
