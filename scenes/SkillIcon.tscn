@@ -1,11 +1,18 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scenes/SkillIcon.gd" type="Script" id=1]
+[ext_resource path="res://skill_sheet1.png" type="Texture" id=2]
 
 [node name="SkillIcon" type="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+margin_right = 50.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+texture = ExtResource( 2 )
+icon_target_size = 50
+icon_texture_section_size = Vector2( 50, 50 )
+texture_map_row_cnt = 10
+texture_map_column_cnt = 10
