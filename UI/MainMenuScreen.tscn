@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://font/roboto_mono_64.tres" type="DynamicFont" id=1]
+[ext_resource path="res://font/roboto_mono_32.tres" type="DynamicFont" id=2]
+[ext_resource path="res://UI/MainMenuScreen.gd" type="Script" id=3]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.231373, 0.231373, 0.231373, 1 )
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color( 0.341176, 0.0352941, 0.0352941, 1 )
+
+[node name="MainMenuScreen" type="CanvasLayer"]
+script = ExtResource( 3 )
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1.0
+margin_right = 1.0
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 1014.0
+margin_bottom = 590.0
+
+[node name="Rows" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+margin_right = 1004.0
+margin_bottom = 580.0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/Rows"]
+margin_right = 1004.0
+margin_bottom = 86.0
+custom_fonts/font = ExtResource( 1 )
+text = "ARBEITSTITEL1"
+align = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/MarginContainer/Rows"]
+margin_top = 90.0
+margin_right = 1004.0
+margin_bottom = 192.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/Rows/CenterContainer"]
+margin_left = 458.0
+margin_right = 546.0
+margin_bottom = 102.0
+
+[node name="PlayButton" type="Button" parent="PanelContainer/MarginContainer/Rows/CenterContainer/VBoxContainer"]
+margin_right = 88.0
+margin_bottom = 49.0
+custom_fonts/font = ExtResource( 2 )
+text = "PLAY"
+
+[node name="QuitButton" type="Button" parent="PanelContainer/MarginContainer/Rows/CenterContainer/VBoxContainer"]
+margin_top = 53.0
+margin_right = 88.0
+margin_bottom = 102.0
+custom_fonts/font = ExtResource( 2 )
+text = "EXIT"
+[connection signal="pressed" from="PanelContainer/MarginContainer/Rows/CenterContainer/VBoxContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/Rows/CenterContainer/VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
